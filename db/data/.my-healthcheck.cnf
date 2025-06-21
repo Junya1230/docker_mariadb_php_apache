@@ -1,0 +1,6 @@
+[mariadb-client]
+port=3306
+socket=/run/mariadb/mariadb.sock
+user=healthcheck
+password=:d3^_YBk+JE[_17wPanf~P<SwV50@Qsq
+
