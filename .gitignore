@@ -1,0 +1,121 @@
+# Laravel Framework
+*.log
+.DS_Store
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+Homestead.json
+Homestead.yaml
+Thumbs.db
+
+# Database
+*.sqlite*
+
+# Storage directories
+src/storage/app/*
+!src/storage/app/private/
+!src/storage/app/public/
+!src/storage/app/.gitignore
+
+src/storage/logs/*
+!src/storage/logs/.gitignore
+
+src/storage/framework/cache/*
+!src/storage/framework/cache/.gitignore
+
+src/storage/framework/sessions/*
+!src/storage/framework/sessions/.gitignore
+
+src/storage/framework/testing/*
+!src/storage/framework/testing/.gitignore
+
+src/storage/framework/views/*
+!src/storage/framework/views/.gitignore
+
+src/storage/app/public/*
+!src/storage/app/public/.gitignore
+
+src/storage/app/private/*
+!src/storage/app/private/.gitignore
+
+# Bootstrap cache
+src/bootstrap/cache/*
+!src/bootstrap/cache/.gitignore
+
+# Framework specific files
+src/storage/framework/compiled.php
+src/storage/framework/config.php
+src/storage/framework/down
+src/storage/framework/events.scanned.php
+src/storage/framework/maintenance.php
+src/storage/framework/routes.php
+src/storage/framework/routes.scanned.php
+src/storage/framework/schedule-*
+src/storage/framework/services.json
+
+# Docker and environment
+logs/*
+!logs/.gitignore
+
+db/data/*
+!db/data/.gitignore
+
+# Database specific files
+db/data/*.pid
+db/data/*.log
+db/data/ib_*
+db/data/aria_log*
+db/data/undo*
+db/data/tc.log
+db/data/multi-master.info
+db/data/mariadb_upgrade_info
+db/data/ddl_recovery*
+
+# Composer
+src/vendor/
+
+# Node modules (if using frontend build tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+dist/
+build/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.cache 
