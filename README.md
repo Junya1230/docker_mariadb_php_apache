@@ -13,26 +13,26 @@ Laravel + MariaDB + Apache + PHP の開発環境をDockerで構築したプロ�
 ### 1. リポジトリのクローン
 
 ```bash
-git clone <your-repository-url>
+git clone git@github.com:Junya1230/docker_mariadb_php_apache.git
 cd docker_mariadb_php_apache
 ```
 
-### 2. 環境変数ファイルの作成
-
-```bash
-cp src/.env.example src/.env
-```
-
-### 3. Dockerコンテナの起動
+### 2. Dockerコンテナの起動
 
 ```bash
 docker-compose up -d
 ```
 
-### 4. PHP依存関係のインストール
+### 3. PHP依存関係のインストール
 
 ```bash
 docker-compose exec app composer install
+```
+
+### 4. 環境変数ファイルの作成
+
+```bash
+cp src/.env.example src/.env
 ```
 
 ### 5. Laravelアプリケーションキーの生成
@@ -105,6 +105,16 @@ docker_mariadb_php_apache/
 
 ## 注意事項
 
-- `vendor/`ディレクトリはGitで管理されていません。初回セットアップ時に`composer install`を実行してください。
-- データベースのデータは`db/data/`に保存されますが、Gitでは管理されません。
-- ログファイルは`logs/`に保存されますが、Gitでは管理されません。 
+### PHP依存関係について
+- `src/vendor/`ディレクトリはGitで管理されていません（`.gitignore`で除外）
+- これは**意図的な設計**です：
+  - リポジトリサイズを小さく保つため
+  - 異なる環境での互換性を確保するため
+  - `composer.json`と`composer.lock`で依存関係のバージョンを管理
+- **必ず**セットアップ手順の「3. PHP依存関係のインストール」を実行してください
+- 新しいパッケージを追加した場合は`docker-compose exec app composer install`を再実行
+
+### データベースとログについて
+- データベースのデータは`db/data/`に保存されますが、Gitでは管理されません
+- ログファイルは`logs/`に保存されますが、Gitでは管理されません
+- 大きなファイル（データベースファイルなど）は`.gitignore`で除外されているため、リポジトリサイズを適切に保っています 
