@@ -31,6 +31,8 @@ services:
   app:
     # コンテナの名前を指定
     container_name: app
+    # コンテナの再起動を指定
+    restart: always
     # ./src/Dockerfile を使用してビルド
     build:
       context: ./src
@@ -47,3 +49,4 @@ services:
       - ./logs/apache:/var/log/apache2
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
       - ./config/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    working_dir: /var/www/laravel
