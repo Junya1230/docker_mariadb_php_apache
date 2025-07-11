@@ -11,7 +11,9 @@ RUN apt-get update \
 # zlib1g-dev: zlibライブラリをインストール
 # vim: テキストエディタ
 # libzip-dev: zipファイルを扱うためのライブラリ
-&& apt-get install -y zlib1g-dev vim libzip-dev \
+# chromium: WebDriverテスト用のブラウザ
+# chromium-driver: ChromeDriver
+&& apt-get install -y zlib1g-dev vim libzip-dev chromium chromium-driver \
 # phpの拡張モジュールをインストール
 # zip: zipファイルを扱うための拡張モジュール
 # pdo_mysql: MySQLデータベースに接続するための拡張モジュール
@@ -32,9 +34,19 @@ ENV COMPOSER_HOME /composer
 ENV PATH $PATH:/composer/vendor/bin
 
 # Laravel本体を/var/www/laravelにインストール
-# laravel/laravel: Laravelのイメージ
-# /var/www/laravel: インストール先のディレクトリ
 RUN composer create-project laravel/laravel /var/www/laravel
+
+# 依存パッケージをインストール
+WORKDIR /var/www/laravel
+RUN composer install
+
+# php-webdriverをインストール
+RUN cd /var/www/laravel && composer require php-webdriver/webdriver
+
+# ChromeDriverの設定
+ENV CHROME_DRIVER_VERSION=latest
+ENV CHROME_DRIVER=/usr/bin/chromedriver
+ENV PATH=$PATH:/usr/bin/chromedriver
 
 # ApacheのDocumentRootを/var/www/laravel/publicに変更
 RUN sed -i 's|/var/www/html|/var/www/laravel/public|g' /etc/apache2/sites-available/000-default.conf

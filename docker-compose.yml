@@ -44,9 +44,26 @@ services:
       - db
     volumes:
       - ./src:/var/www/laravel
+      - /var/www/laravel/vendor
+      # ↑ vendorディレクトリだけはローカルと同期しない
       - ./src/storage/logs:/var/www/laravel/storage/logs
       - ./src/.env:/var/www/laravel/.env
       - ./logs/apache:/var/log/apache2
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
       - ./config/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
     working_dir: /var/www/laravel
+
+  selenium:
+    container_name: selenium
+    image: seleniarm/standalone-chromium:latest
+    restart: always
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    environment:
+      - SE_NODE_MAX_SESSIONS=4
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - app
